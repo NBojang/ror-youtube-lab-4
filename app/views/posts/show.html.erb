@@ -1,4 +1,22 @@
 <h2><%= @post.title %></h2>
 <p><%= @post.body %></p>
 <hr>
-<%= link_to "Edit", edit_post_path(@post), :class => 'btn btn-default'
+<%= link_to "Edit", edit_post_path(@post), :class => 'btn btn-default' %>
+<%= link_to "Delete", post_post_path(@post), method: :delete,data: {confirm: 'Are you aure?'}, :class => 'btn btn-danger' %>
+<hr>
+<h3>Add comment </h3>
+<%= form_for([@post, @post.comments.build do |f| %>
+<% if @post.errors.any? %>
+
+<p>
+  <%= f.label :username %><br>
+<%= f.text_field(:username, {:class => 'form-control'})%>
+</p>
+<p>
+  <%= f.label :body %><br>
+<%= f.text_area(:body, {:class => 'form-control'})%>
+</p>
+<p>
+<%= f.submit ({:class => 'btn btn-primary '})%>
+</p>
+<% end %>
